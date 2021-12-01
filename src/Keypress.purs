@@ -8,11 +8,11 @@ module Keypress
 import Prelude
 
 import Control.Promise (Promise, toAffE)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Aff (Aff)
 
-foreign import keypressImpl :: Unit -> Effect (Promise Pressed)
+foreign import keypressImpl :: forall a. (a -> Maybe a) -> Maybe a -> Unit -> Effect (Promise Pressed)
 
 type Pressed = {
     key :: Maybe Key,
@@ -28,4 +28,4 @@ type Key = {
 }
 
 keypress :: Aff Pressed
-keypress = toAffE $ keypressImpl unit
+keypress = toAffE $ keypressImpl Just Nothing unit
