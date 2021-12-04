@@ -10,7 +10,7 @@ import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Aff (Aff)
 
-foreign import keypressImpl :: forall a. (a -> Maybe a) -> Maybe a -> Unit -> Effect (Promise Pressed)
+foreign import keypressImpl ∷ ∀ a. (a → Maybe a) → Maybe a → Unit → Effect (Promise Pressed)
 
 type Pressed
   = { key :: Maybe Key
